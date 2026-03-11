@@ -37,14 +37,14 @@ app.get('/notes/:noteId',(req,res)=>{
   }
   );
 });
-app.get('/test-error',(res,req)=>{
+app.get('/test-error',(req,res)=>{
   res.status(500);
   throw new Error('Simulated server error');
 });
 app.use((req,res)=>{
-  res.status(404).json(console.log('Route not fouund'));
+  res.status(404).json('Route not found');
 });
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error('Error:', err.message);
   res.status(500).json({
     message: 'Internal Server Error',
