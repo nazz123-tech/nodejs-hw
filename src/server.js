@@ -38,11 +38,12 @@ app.get('/notes/:noteId',(req,res)=>{
   );
 });
 app.get('/test-error',(req,res)=>{
-  res.status(500);
   throw new Error('Simulated server error');
 });
 app.use((req,res)=>{
-  res.status(404).json('Route not found');
+  res.status(404).json({
+    message: 'Route not found'
+  });
 });
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
