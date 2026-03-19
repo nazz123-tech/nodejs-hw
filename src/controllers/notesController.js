@@ -39,7 +39,7 @@ export const updateNote= async (req,res)=>{
     {returnDocument: 'after'}
   );
   if(!note){
-    createHttpError(404,'Note not found');
+    throw createHttpError(404,'Note not found');
   }
   res.status(200).json(note);
 };

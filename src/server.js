@@ -19,11 +19,11 @@ app.use(cors());
 app.use(logger);
 
 
-
 app.use(notesRoutes);
 
-app.use(errorHandler);
 app.use(notFoundHandler);
+app.use(errorHandler);
+
 
 await connectMongoDB();
 
