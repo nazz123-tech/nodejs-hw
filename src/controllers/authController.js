@@ -4,11 +4,11 @@ import bcrypt from "bcrypt";
 import { createSession, setSessionCookies } from "../services/auth.js";
 import { Session } from "../models/session.js";
 import jwt from 'jsonwebtoken';
-import { sendEmail } from "../utils/sendEmail.js";
+import { sendMail } from "../utils/sendMail.js";
 import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { create } from "node:domain";
+
 
 export const registerUser=async(req,res)=>{
   const {email, password}=req.body;
@@ -111,7 +111,7 @@ export const requestResetEmail= async (req, res)=>{
     link: `${process.env.FRONTEND_DOMAIN}/reset-password?token=${resetToken}`,
   });
   try{
-    await sendEmail({
+    await sendMail({
       from:process.env.SMTP_FROM,
       to: email,
       subject: 'Reset your password',
