@@ -3,7 +3,7 @@ import { loginUser, logoutUser, registerUser, requestResetEmail, resetPassword }
 import { celebrate } from "celebrate";
 import { loginUserSchema, registerUserSchema, requestResetEmailSchema, resetPasswordSchema } from "../validations/authValidation.js";
 import { refreshUserSession } from "../controllers/authController.js";
-import { upload } from "../middleware/multer.js";
+
 
 const router = Router();
 
@@ -12,6 +12,6 @@ router.post('/auth/login',celebrate(loginUserSchema),loginUser);
 router.post('/auth/logout',logoutUser);
 router.post('/auth/refresh', refreshUserSession);
 router.post('/auth/request-reset-mail', celebrate(requestResetEmailSchema), requestResetEmail);
-router.post('/auth/reset-password',celebrate(resetPasswordSchema), upload.single("avatar"), resetPassword);
+router.post('/auth/reset-password',celebrate(resetPasswordSchema), resetPassword);
 
 export default router;
